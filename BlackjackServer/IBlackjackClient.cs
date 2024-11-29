@@ -1,6 +1,9 @@
-﻿namespace BlackjackServer;
+﻿using JetBrains.Annotations;
+
+namespace BlackjackServer;
 
 public interface IBlackjackClient
 {
-    Task ReceiveMessage(string message);
+    [UsedImplicitly]
+    Task ReceiveRankRating(int rankRating);
 }

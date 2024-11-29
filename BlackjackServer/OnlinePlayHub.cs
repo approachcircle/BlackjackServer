@@ -4,6 +4,8 @@ namespace BlackjackServer;
 
 public class OnlinePlayHub : Hub<IBlackjackClient>
 {
-    public async Task SendMessage(string message) => await Clients.Caller.ReceiveMessage(message);
-    public async Task SubmitScore(int score, string outcome) => await Clients.Caller.ReceiveMessage(score.ToString());
+    public void SubmitScore(RankChangeOutcome outcome, int cardCount)
+    {
+        ScoreProcessor.Process(outcome, cardCount, Context.ConnectionId);
+    }
 }
