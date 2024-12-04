@@ -1,4 +1,6 @@
-﻿namespace BlackjackServer;
+﻿using System;
+
+namespace BlackjackServer;
 
 public static class ScoreProcessor
 {
