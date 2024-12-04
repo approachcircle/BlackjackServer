@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -14,6 +15,11 @@ public static class Program
         builder.Logging.AddFilter("Microsoft.AspNetCore.Http.Connections", LogLevel.Debug);
         var app = builder.Build();
         app.MapHub<OnlinePlayHub>("/online");
+        app.Lifetime.ApplicationStopped.Register(() =>
+        {
+            RealmAccess.Instance.Dispose();
+            Cryptography.Instance.Dispose();
+        });
         app.Run();
     }
 }
